@@ -1,0 +1,30 @@
+{
+  "name": "makedev-mobile",
+  "version": "1.0.0",
+  "authors": [
+    "Evheniy Bystrov <evheniy.bystrov@gmail.com>"
+  ],
+  "description": "Mobile version of MakeDev.org",
+  "main": "scripts/app.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "makedev"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "scripts/bower-components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "materialize": "~0.97",
+    "jquery": "~2.1.3"
+  }
+}
