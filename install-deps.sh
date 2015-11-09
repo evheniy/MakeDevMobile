@@ -1,4 +1,1 @@
-#!/usr/bin/env bash
-sudo npm i &&
-bower i &&
-echo 'DONE!'
+npm i && bower i && echo 'DONE!'
