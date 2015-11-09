@@ -122,6 +122,15 @@ module.exports = function (grunt) {
                 src: 'bower_components/materialize/dist/js/materialize.min.js',
                 dest: 'web/js/materialize.min.js'
             }
+        },
+        /* Cleaning build results */
+        clean: {
+            build: [
+                'web/js/',
+                'web/css/',
+                'web/images/',
+                'web/font/'
+            ]
         }
     });
 
@@ -130,19 +139,18 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     //grunt.loadNpmTasks('grunt-lesslint');
     //grunt.loadNpmTasks('grunt-contrib-concat');
     //grunt.loadNpmTasks('grunt-contrib-less');
     //grunt.loadNpmTasks('grunt-concat-css');
-    //grunt.loadNpmTasks('grunt-contrib-clean');
     //grunt.loadNpmTasks('grunt-casperjs');
     //grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['jshint', 'jslint', 'copy']);
+    grunt.registerTask('default', ['clean', 'jshint', 'jslint', 'copy']);
     grunt.registerTask('serve', ['default', 'connect:server', 'watch']);
-    //grunt.registerTask('lint', ['jshint', 'jslint']);
+    grunt.registerTask('lint', ['jshint', 'jslint']);
     //grunt.registerTask('build', ['clean', 'lint', 'less:development', 'concat_css']);
-    //grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
     //grunt.registerTask('test', ['build', 'casperjs']);
 };
