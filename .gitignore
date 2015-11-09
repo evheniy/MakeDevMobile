@@ -5,6 +5,7 @@ dist
 .sass-cache
 bower_components
 node_modules/
+out/
 app/bower_components/
 app/scripts/ui-components/dest/
 app/scripts/controllers/dest/
