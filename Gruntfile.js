@@ -23,6 +23,13 @@ module.exports = function (grunt) {
                 }
             }
         },
+        htmllint: {
+            index: {
+                src: [
+                    'app/*.html'
+                ]
+            }
+        },
         /* Running http server */
         connect: {
             server: {
@@ -123,13 +130,21 @@ module.exports = function (grunt) {
                 dest: 'web/js/materialize.min.js'
             }
         },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'web/index.html': 'app/index.html'
+                }
+            }
+        },
         /* Cleaning build results */
         clean: {
             build: [
-                'web/js/',
-                'web/css/',
-                'web/images/',
-                'web/font/'
+                'web'
             ]
         }
     });
@@ -140,6 +155,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-htmllint');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     //grunt.loadNpmTasks('grunt-lesslint');
     //grunt.loadNpmTasks('grunt-contrib-concat');
     //grunt.loadNpmTasks('grunt-contrib-less');
@@ -148,9 +165,9 @@ module.exports = function (grunt) {
     //grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['clean', 'jshint', 'jslint', 'copy']);
+    grunt.registerTask('default', ['clean', 'htmllint', 'jshint', 'jslint', 'copy', 'htmlmin']);
     grunt.registerTask('serve', ['default', 'connect:server', 'watch']);
-    grunt.registerTask('lint', ['jshint', 'jslint']);
+    grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint']);
     //grunt.registerTask('build', ['clean', 'lint', 'less:development', 'concat_css']);
     //grunt.registerTask('test', ['build', 'casperjs']);
 };

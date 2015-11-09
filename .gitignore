@@ -6,8 +6,5 @@ dist
 bower_components
 node_modules/
 out/
-web/css
-web/js
-web/images
-web/font
+web
 npm-debug.log

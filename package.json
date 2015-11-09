@@ -17,6 +17,8 @@
     "grunt-lesslint": "~1.1.14",
     "grunt-mocha": "~0.4",
     "jshint-stylish": "~1.0.0",
-    "grunt-webpack": "~1.0"
+    "grunt-webpack": "~1.0",
+    "grunt-contrib-htmlmin": "~0.6",
+    "grunt-htmllint": "~0.2"
   }
 }
