@@ -3,7 +3,7 @@
 Building of project is managed with **grunt**
 
 ## How to start (*nix)
-* `git clone https://github.com/iLikeKoffee/backreact YOUR_PROJECT_DIRECTORY`
+* `git clone https://github.com/evheniy/MakeDevMobile YOUR_PROJECT_DIRECTORY`
 * `cd YOUR_PROJECT_DIRECTORY`
 * `chmod +x install-deps.sh`
 * `chmod +x install-env.sh`
