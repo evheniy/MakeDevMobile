@@ -5,10 +5,8 @@ Building of project is managed with **grunt**
 ## How to start (*nix)
 * `git clone https://github.com/evheniy/MakeDevMobile YOUR_PROJECT_DIRECTORY`
 * `cd YOUR_PROJECT_DIRECTORY`
-* `chmod +x install-deps.sh`
-* `chmod +x install-env.sh`
-* `sh ./install-env.sh` *Requires root access*, if you have bower, grunt and grunt-cli installed, skip it.
-* `sh ./install-deps.sh` *Should work without root access.*
+* `sh install-env.sh` *Requires root access*, if you have bower, grunt and grunt-cli installed, skip it.
+* `sh install-deps.sh` *Should work without root access.*
 * `grunt` - Should run do some work on building examples, run tests in Chrome(Chrome window will blink once) and open working examples in your default browser.
 * `git remote remove origin` and `git remote add origin YOUR_REPO_URL` - change origin from this repo to your one.
 * `git push origin master --set-upstream` 
