@@ -68,7 +68,16 @@ module.exports = function (grunt) {
                 files: [
                     'src/less/*.less'
                 ],
-                tasks: ['less:development', 'concat_css'],
+                tasks: ['lesslint', 'less:development', 'concat_css', 'cssmin'],
+                options: {
+                    reload: true
+                }
+            },
+            css: {
+                files: [
+                    'src/css/*.css'
+                ],
+                tasks: ['csslint', 'concat_css', 'cssmin'],
                 options: {
                     reload: true
                 }
@@ -78,15 +87,6 @@ module.exports = function (grunt) {
                     'src/index.html'
                 ],
                 tasks: ['htmllint', 'htmlmin'],
-                options: {
-                    reload: true
-                }
-            },
-            css: {
-                files: [
-                    'src/css/*.css'
-                ],
-                tasks: ['csslint', 'cssmin'],
                 options: {
                     reload: true
                 }
@@ -105,6 +105,7 @@ module.exports = function (grunt) {
             /* Watching for Gruntfile changes */
             gruntfile: {
                 files: ['./Gruntfile.js'],
+                tasks: ['build'],
                 options: {
                     reload: true
                 }
