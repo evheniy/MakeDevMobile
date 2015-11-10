@@ -217,6 +217,22 @@ module.exports = function (grunt) {
                 }
             }
         },
+        webpack: {
+            someName: {
+                // webpack options
+                entry: "./src/js/main.js",
+                output: {
+                    path: 'web/js',
+                    filename: 'app.js'
+                },
+                stats: {
+                    // Configure the console output
+                    colors: false,
+                    modules: true,
+                    reasons: true
+                }
+            }
+        },
         /* Cleaning build results */
         clean: {
             build: [
@@ -241,12 +257,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concat-css');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-casperjs');
-    //grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-mocha');
 
     grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint', 'lesslint', 'csslint']);
-    grunt.registerTask('build', ['clean', 'lint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin', 'less:development', 'concat_css', 'cssmin']);
+    grunt.registerTask('build', ['clean', 'lint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin', 'less:development', 'concat_css', 'cssmin', 'webpack']);
     grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
     grunt.registerTask('default', 'serve');
     //grunt.registerTask('test', ['build', 'casperjs']);

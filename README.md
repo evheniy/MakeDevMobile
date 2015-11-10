@@ -9,7 +9,6 @@ Building of project is managed with **grunt**
 * `sh install-env.sh` *Requires root access*, if you have bower, grunt and grunt-cli installed, skip it.
 * `sh install-deps.sh` *Should work without root access.*
 * `grunt` - Should run do some work on building examples.
-* `grunt serve` - Start research project.
 
 ## How to store in your repository (*nix)
 * `git remote remove origin` and `git remote add origin YOUR_REPO_URL` - change origin from this repo to your one.
