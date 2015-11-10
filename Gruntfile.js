@@ -27,6 +27,17 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        lesslint: {
+            src: ['src/**/*.less']
+        },
+        csslint: {
+            strict: {
+                options: {
+                    import: 2
+                },
+                src: ['src/css/*.css']
+            }
+        },
         /* Running http server */
         connect: {
             server: {
@@ -50,6 +61,34 @@ module.exports = function (grunt) {
                 files: ['src/**.js'],
                 options: {
                     livereload: true
+                }
+            },
+            /* Watching for .less files changes */
+            less: {
+                files: [
+                    'src/less/*.less'
+                ],
+                tasks: ['less:development', 'concat_css'],
+                options: {
+                    reload: true
+                }
+            },
+            html: {
+                files: [
+                    'src/index.html'
+                ],
+                tasks: ['htmllint', 'htmlmin'],
+                options: {
+                    reload: true
+                }
+            },
+            css: {
+                files: [
+                    'src/css/*.css'
+                ],
+                tasks: ['csslint', 'cssmin'],
+                options: {
+                    reload: true
                 }
             },
             /* Watching for scripts changes */
@@ -131,21 +170,51 @@ module.exports = function (grunt) {
                 }
             }
         },
+        /* images packing */
         pngmin: {
             src: [
                 'src/*.png',
                 'src/img/*.png'
             ],
-            dest: 'web/img'
+            dest: 'web'
         },
         gifmin: {
             src: ['src/**/*.gif'],
-            dest: 'web/img'
+            dest: 'web'
         },
         jpgmin: {
             src: ['src/**/*.jpg'],
-            dest: 'web/img',
+            dest: 'web',
             quality: 80
+        },
+        /* LESS compiling */
+        less: {
+            development: {
+                files: [
+                    /* Compile components' less stylesheets */
+                    {
+                        expand: true,
+                        cwd: 'src/less',
+                        src: ['*.less'],
+                        dest: './tmp/css',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
+        /* Concatenating all styles into single file*/
+        concat_css: {
+            all: {
+                src: ['src/css/*.css', './tmp/css/*.css'],
+                dest: "tmp/css/style.min.css"
+            }
+        },
+        cssmin: {
+            target: {
+                files: {
+                    'web/css/style.min.css': ['tmp/css/style.min.css']
+                }
+            }
         },
         /* Cleaning build results */
         clean: {
@@ -165,17 +234,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-htmllint');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-imagine');
-    //grunt.loadNpmTasks('grunt-lesslint');
-    //grunt.loadNpmTasks('grunt-contrib-concat');
-    //grunt.loadNpmTasks('grunt-contrib-less');
-    //grunt.loadNpmTasks('grunt-concat-css');
+    grunt.loadNpmTasks('grunt-lesslint');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-concat-css');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     //grunt.loadNpmTasks('grunt-casperjs');
     //grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['clean', 'htmllint', 'jshint', 'jslint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin']);
-    grunt.registerTask('serve', ['default', 'connect:server', 'watch']);
-    grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint']);
-    //grunt.registerTask('build', ['clean', 'lint', 'less:development', 'concat_css']);
+    grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint', 'lesslint', 'csslint']);
+    grunt.registerTask('build', ['clean', 'lint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin', 'less:development', 'concat_css', 'cssmin']);
+    grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
+    grunt.registerTask('default', 'serve');
     //grunt.registerTask('test', ['build', 'casperjs']);
 };

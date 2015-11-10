@@ -20,6 +20,8 @@
     "grunt-webpack": "*",
     "grunt-contrib-htmlmin": "*",
     "grunt-htmllint": "*",
-    "grunt-imagine": "*"
+    "grunt-imagine": "*",
+    "grunt-contrib-csslint": "*",
+    "grunt-contrib-cssmin": "*"
   }
 }
