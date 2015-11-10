@@ -3,14 +3,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
         /* Check code style */
         jshint: {
-            js: ['Gruntfile.js', 'src/*.js'],
+            js: ['Gruntfile.js', './src/*.js'],
             options: {
                 reporter: require('jshint-stylish')
             }
         },
         jslint: {
             client: {
-                src: ['Gruntfile.js', 'src/*.js'],
+                src: ['Gruntfile.js', './src/*.js'],
                 directives: {
                     browser: true,
                     predef: [
@@ -23,19 +23,19 @@ module.exports = function (grunt) {
         htmllint: {
             index: {
                 src: [
-                    'src/*.html'
+                    './src/*.html'
                 ]
             }
         },
         lesslint: {
-            src: ['src/**/*.less']
+            src: ['./src/**/*.less']
         },
         csslint: {
             strict: {
                 options: {
                     import: 2
                 },
-                src: ['src/css/*.css']
+                src: ['./src/css/*.css']
             }
         },
         /* Running http server */
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
              * Watching targets of preprocessors(dest) for livereload
              */
             targets: {
-                files: ['src/**.js'],
+                files: ['./src/**.js'],
                 options: {
                     livereload: true
                 }
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
             /* Watching for .less files changes */
             less: {
                 files: [
-                    'src/less/*.less'
+                    './src/less/*.less'
                 ],
                 tasks: ['lesslint', 'less:development', 'concat_css', 'cssmin'],
                 options: {
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
             },
             css: {
                 files: [
-                    'src/css/*.css'
+                    './src/css/*.css'
                 ],
                 tasks: ['csslint', 'concat_css', 'cssmin'],
                 options: {
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
             },
             html: {
                 files: [
-                    'src/index.html'
+                    './src/index.html'
                 ],
                 tasks: ['htmllint', 'htmlmin'],
                 options: {
@@ -113,51 +113,51 @@ module.exports = function (grunt) {
         },
         copy: {
             backbone: {
-                src: 'bower_components/backbone/backbone.js',
-                dest: 'web/js/backbone.js'
+                src: './bower_components/backbone/backbone.js',
+                dest: './web/js/backbone.js'
             },
             jquery: {
-                src: 'bower_components/jquery/dist/jquery.min.js',
-                dest: 'web/js/jquery.min.js'
+                src: './bower_components/jquery/dist/jquery.min.js',
+                dest: './web/js/jquery.min.js'
             },
             jquery_map: {
-                src: 'bower_components/jquery/dist/jquery.min.map',
-                dest: 'web/js/jquery.min.map'
+                src: './bower_components/jquery/dist/jquery.min.map',
+                dest: './web/js/jquery.min.map'
             },
             underscore: {
-                src: 'bower_components/underscore/underscore-min.js',
-                dest: 'web/js/underscore-min.js'
+                src: './bower_components/underscore/underscore-min.js',
+                dest: './web/js/underscore-min.js'
             },
             underscore_map: {
-                src: 'bower_components/underscore/underscore-min.map',
-                dest: 'web/js/underscore-min.map'
+                src: './bower_components/underscore/underscore-min.map',
+                dest: './web/js/underscore-min.map'
             },
             materialize_css: {
-                src: 'bower_components/materialize/dist/css/materialize.min.css',
-                dest: 'web/css/materialize.min.css'
+                src: './bower_components/materialize/dist/css/materialize.min.css',
+                dest: './web/css/materialize.min.css'
             },
             materialize_font: {
                 files: [
                     {
                         expand: true,
                         flatten: true,
-                        src: 'bower_components/materialize/dist/font/material-design-icons/*',
-                        dest: 'web/font/material-design-icons/',
+                        src: './bower_components/materialize/dist/font/material-design-icons/*',
+                        dest: './web/font/material-design-icons/',
                         filter: 'isFile'
                     },
                     {
                         expand: true,
                         flatten: true,
-                        src: 'bower_components/materialize/dist/font/roboto/*',
-                        dest: 'web/font/roboto/',
+                        src: './bower_components/materialize/dist/font/roboto/*',
+                        dest: './web/font/roboto/',
                         filter: 'isFile'
                     }
                 ]
 
             },
             materialize_js: {
-                src: 'bower_components/materialize/dist/js/materialize.min.js',
-                dest: 'web/js/materialize.min.js'
+                src: './bower_components/materialize/dist/js/materialize.min.js',
+                dest: './web/js/materialize.min.js'
             }
         },
         htmlmin: {
@@ -167,25 +167,25 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'web/index.html': 'src/index.html'
+                    './web/index.html': './src/index.html'
                 }
             }
         },
         /* images packing */
         pngmin: {
             src: [
-                'src/*.png',
-                'src/img/*.png'
+                './src/*.png',
+                './src/img/*.png'
             ],
-            dest: 'web'
+            dest: './web'
         },
         gifmin: {
-            src: ['src/**/*.gif'],
-            dest: 'web'
+            src: ['./src/**/*.gif'],
+            dest: './web'
         },
         jpgmin: {
-            src: ['src/**/*.jpg'],
-            dest: 'web',
+            src: ['./src/**/*.jpg'],
+            dest: './web',
             quality: 80
         },
         /* LESS compiling */
@@ -195,7 +195,7 @@ module.exports = function (grunt) {
                     /* Compile components' less stylesheets */
                     {
                         expand: true,
-                        cwd: 'src/less',
+                        cwd: './src/less',
                         src: ['*.less'],
                         dest: './tmp/css',
                         ext: '.css'
@@ -206,23 +206,23 @@ module.exports = function (grunt) {
         /* Concatenating all styles into single file*/
         concat_css: {
             all: {
-                src: ['src/css/*.css', './tmp/css/*.css'],
-                dest: "tmp/css/style.min.css"
+                src: ['./src/css/*.css', './tmp/css/*.css'],
+                dest: "./tmp/css/style.min.css"
             }
         },
         cssmin: {
             target: {
                 files: {
-                    'web/css/style.min.css': ['tmp/css/style.min.css']
+                    './web/css/style.min.css': ['./tmp/css/style.min.css']
                 }
             }
         },
         webpack: {
-            someName: {
+            app: {
                 // webpack options
                 entry: "./src/js/main.js",
                 output: {
-                    path: 'web/js',
+                    path: './tmp/js',
                     filename: 'app.js'
                 },
                 stats: {
@@ -230,14 +230,22 @@ module.exports = function (grunt) {
                     colors: false,
                     modules: true,
                     reasons: true
+                },
+                inline: true
+            }
+        },
+        uglify: {
+            app: {
+                files: {
+                    './web/js/app.min.js': ['./tmp/js/app.js']
                 }
             }
         },
         /* Cleaning build results */
         clean: {
             build: [
-                'web',
-                'tmp'
+                './web',
+                './tmp'
             ]
         }
     });
@@ -258,11 +266,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-webpack');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     //grunt.loadNpmTasks('grunt-casperjs');
     //grunt.loadNpmTasks('grunt-mocha');
 
     grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint', 'lesslint', 'csslint']);
-    grunt.registerTask('build', ['clean', 'lint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin', 'less:development', 'concat_css', 'cssmin', 'webpack']);
+    grunt.registerTask('build', ['clean', 'lint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin', 'less:development', 'concat_css', 'cssmin', 'webpack', 'uglify']);
     grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
     grunt.registerTask('default', 'serve');
     //grunt.registerTask('test', ['build', 'casperjs']);

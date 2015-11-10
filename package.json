@@ -22,6 +22,7 @@
     "grunt-htmllint": "*",
     "grunt-imagine": "*",
     "grunt-contrib-csslint": "*",
-    "grunt-contrib-cssmin": "*"
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-uglify": "*"
   }
 }
