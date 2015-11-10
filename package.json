@@ -19,6 +19,7 @@
     "jshint-stylish": "*",
     "grunt-webpack": "*",
     "grunt-contrib-htmlmin": "*",
-    "grunt-htmllint": "*"
+    "grunt-htmllint": "*",
+    "grunt-imagine": "*"
   }
 }

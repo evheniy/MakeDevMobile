@@ -3,30 +3,27 @@ module.exports = function (grunt) {
     grunt.initConfig({
         /* Check code style */
         jshint: {
-            js: ['Gruntfile.js', 'app/*.js'],
+            js: ['Gruntfile.js', 'src/*.js'],
             options: {
                 reporter: require('jshint-stylish')
             }
         },
         jslint: {
             client: {
-                src: ['Gruntfile.js', 'app/*.js'],
+                src: ['Gruntfile.js', 'src/*.js'],
                 directives: {
                     browser: true,
                     predef: [
                         'module',
                         'require'
                     ]
-                },
-                options: {
-                    junit: 'out/client-junit.xml'
                 }
             }
         },
         htmllint: {
             index: {
                 src: [
-                    'app/*.html'
+                    'src/*.html'
                 ]
             }
         },
@@ -50,11 +47,7 @@ module.exports = function (grunt) {
              * Watching targets of preprocessors(dest) for livereload
              */
             targets: {
-                files: ['app/scripts/**/dest/**.js',
-                    'app/app.js',
-                    'app/scripts/router.js',
-                    'app/styles/dest/styles.css'
-                    ],
+                files: ['src/**.js'],
                 options: {
                     livereload: true
                 }
@@ -62,10 +55,7 @@ module.exports = function (grunt) {
             /* Watching for scripts changes */
             scripts: {
                 files: [
-                    './app/scripts/controllers/src/**/**.jsx',
-                    './app/scripts/ui-components/src/**/**.jsx',
-                    './app/app.js',
-                    './app/scripts/router.js'
+                    './src/app.js'
                 ],
                 tasks: ['build', 'test'],
                 options: {
@@ -137,14 +127,31 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'web/index.html': 'app/index.html'
+                    'web/index.html': 'src/index.html'
                 }
             }
+        },
+        pngmin: {
+            src: [
+                'src/*.png',
+                'src/img/*.png'
+            ],
+            dest: 'web/img'
+        },
+        gifmin: {
+            src: ['src/**/*.gif'],
+            dest: 'web/img'
+        },
+        jpgmin: {
+            src: ['src/**/*.jpg'],
+            dest: 'web/img',
+            quality: 80
         },
         /* Cleaning build results */
         clean: {
             build: [
-                'web'
+                'web',
+                'tmp'
             ]
         }
     });
@@ -157,6 +164,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-htmllint');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-imagine');
     //grunt.loadNpmTasks('grunt-lesslint');
     //grunt.loadNpmTasks('grunt-contrib-concat');
     //grunt.loadNpmTasks('grunt-contrib-less');
@@ -165,7 +173,7 @@ module.exports = function (grunt) {
     //grunt.loadNpmTasks('grunt-webpack');
     //grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['clean', 'htmllint', 'jshint', 'jslint', 'copy', 'htmlmin']);
+    grunt.registerTask('default', ['clean', 'htmllint', 'jshint', 'jslint', 'copy', 'htmlmin', 'pngmin', 'gifmin', 'jpgmin']);
     grunt.registerTask('serve', ['default', 'connect:server', 'watch']);
     grunt.registerTask('lint', ['htmllint', 'jshint', 'jslint']);
     //grunt.registerTask('build', ['clean', 'lint', 'less:development', 'concat_css']);
