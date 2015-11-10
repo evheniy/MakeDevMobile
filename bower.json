@@ -25,6 +25,7 @@
   "dependencies": {
     "backbone": "*",
     "materialize": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "hammerjs": "*"
   }
 }

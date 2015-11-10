@@ -1,1 +1,11 @@
+require('expose?$!expose?jQuery!jquery');
+require('expose?Hammer!hammerjs');
+window.jQuery = require("jquery");
+window.$ = require("jquery");
+require("underscore");
+require("backbone");
+require("materialize");
+var ViewManager = require('./viewManager');
 alert('Hello world');
+$('p').html('test');
+Materialize.toast('I am a toast!', 4000);

@@ -23,6 +23,7 @@
     "grunt-imagine": "*",
     "grunt-contrib-csslint": "*",
     "grunt-contrib-cssmin": "*",
-    "grunt-contrib-uglify": "*"
+    "grunt-contrib-uglify": "*",
+    "expose-loader": "*"
   }
 }

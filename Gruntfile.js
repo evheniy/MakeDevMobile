@@ -94,9 +94,9 @@ module.exports = function (grunt) {
             /* Watching for scripts changes */
             scripts: {
                 files: [
-                    './src/app.js'
+                    './src/js/*.js'
                 ],
-                tasks: ['build', 'test'],
+                tasks: ['build'],
                 options: {
                     spawn: true,
                     reload: true
@@ -112,13 +112,20 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            js: {
+                expand: true,
+                flatten: true,
+                src: './src/js/*',
+                dest: './tmp/js/',
+                filter: 'isFile'
+            },
             backbone: {
                 src: './bower_components/backbone/backbone.js',
-                dest: './web/js/backbone.js'
+                dest: './tmp/js/backbone.js'
             },
             jquery: {
                 src: './bower_components/jquery/dist/jquery.min.js',
-                dest: './web/js/jquery.min.js'
+                dest: './tmp/js/jquery.js'
             },
             jquery_map: {
                 src: './bower_components/jquery/dist/jquery.min.map',
@@ -126,7 +133,7 @@ module.exports = function (grunt) {
             },
             underscore: {
                 src: './bower_components/underscore/underscore-min.js',
-                dest: './web/js/underscore-min.js'
+                dest: './tmp/js/underscore.js'
             },
             underscore_map: {
                 src: './bower_components/underscore/underscore-min.map',
@@ -157,7 +164,11 @@ module.exports = function (grunt) {
             },
             materialize_js: {
                 src: './bower_components/materialize/dist/js/materialize.min.js',
-                dest: './web/js/materialize.min.js'
+                dest: './tmp/js/materialize.js'
+            },
+            hammerjs: {
+                src: './bower_components/hammerjs/hammer.min.js',
+                dest: './tmp/js/hammer.js'
             }
         },
         htmlmin: {
@@ -220,7 +231,7 @@ module.exports = function (grunt) {
         webpack: {
             app: {
                 // webpack options
-                entry: "./src/js/main.js",
+                entry: "./tmp/js/main.js",
                 output: {
                     path: './tmp/js',
                     filename: 'app.js'
@@ -231,7 +242,16 @@ module.exports = function (grunt) {
                     modules: true,
                     reasons: true
                 },
-                inline: true
+                inline: true,
+                resolve: {
+                    alias: {
+                        jquery: './jquery.js',
+                        hammerjs: './hammer.js',
+                        materialize: './materialize.js',
+                        underscore: './underscore.js',
+                        backbone: './backbone.js'
+                    }
+                }
             }
         },
         uglify: {
