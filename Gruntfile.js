@@ -80,7 +80,7 @@ module.exports = function (grunt) {
             },
             html: {
                 files: [
-                    './src/index.html'
+                    './src/**/*.html'
                 ],
                 tasks: ['htmllint', 'htmlmin'],
                 options: {
@@ -113,6 +113,13 @@ module.exports = function (grunt) {
                 flatten: true,
                 src: './src/js/*',
                 dest: './tmp/js/',
+                filter: 'isFile'
+            },
+            templates: {
+                expand: true,
+                flatten: true,
+                src: './src/templates/*',
+                dest: './tmp/templates/',
                 filter: 'isFile'
             },
             backbone: {

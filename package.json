@@ -24,6 +24,7 @@
     "grunt-contrib-csslint": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-uglify": "*",
-    "expose-loader": "*"
+    "expose-loader": "*",
+    "html-loader": "*"
   }
 }
