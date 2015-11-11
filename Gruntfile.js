@@ -42,13 +42,9 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            connect.static('web')
-                        ];
-                    },
-                    open: true,
-                    hostname: 'localhost'
+                    port: 9001,
+                    base: './web',
+                    open: true
                 }
             }
         },
