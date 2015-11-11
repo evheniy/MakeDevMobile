@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
     currentView: null,
     showView: function (view) {
         'use strict';
