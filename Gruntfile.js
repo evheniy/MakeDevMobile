@@ -3,19 +3,25 @@ module.exports = function (grunt) {
     grunt.initConfig({
         /* Check code style */
         jshint: {
-            js: ['Gruntfile.js', './src/*.js'],
+            js: ['Gruntfile.js', './src/**/*.js'],
             options: {
                 reporter: require('jshint-stylish')
             }
         },
         jslint: {
             client: {
-                src: ['Gruntfile.js', './src/*.js'],
+                src: ['Gruntfile.js', './src/**/*.js'],
                 directives: {
                     browser: true,
+                    nomen: true,
                     predef: [
                         'module',
-                        'require'
+                        'require',
+                        '$',
+                        '_',
+                        'Backbone',
+                        'Materialize',
+                        'console'
                     ]
                 }
             }
