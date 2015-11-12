@@ -1,5 +1,7 @@
 var MainView = require('./mainView'),
     TestView = require('./testView'),
+    ContentModel = require('./contentModel'),
+    PageModel = require('./pageModel'),
     Router = Backbone.Router.extend({
         view: null,
         initialize: function () {
@@ -33,6 +35,15 @@ var MainView = require('./mainView'),
         },
         test: function () {
             'use strict';
+            var contentModel = new ContentModel();
+            contentModel.fetch().complete(function () {
+                console.log(contentModel.get('data'));
+                var pageModel = new PageModel();
+                pageModel.url += 'books/javascript_pocket_guide.json';
+                pageModel.fetch().complete(function () {
+                    console.log(pageModel.get('data'));
+                });
+            });
             Materialize.toast('Test!', 4000);
             this.loadView(new TestView());
         }

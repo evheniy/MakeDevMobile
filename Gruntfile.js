@@ -18,6 +18,7 @@ module.exports = function (grunt) {
                         'module',
                         'require',
                         '$',
+                        'jQuery',
                         '_',
                         'Backbone',
                         'Materialize',
